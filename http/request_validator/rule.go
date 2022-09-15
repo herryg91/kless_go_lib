@@ -13,7 +13,7 @@ import (
 	"gopkg.in/validator.v2"
 )
 
-func Initialize() {
+func InitRules() {
 	validator.SetPrintJSON(true)
 	validator.SetValidationFunc("required", rule_required)
 	validator.SetValidationFunc("email", rule_email)
