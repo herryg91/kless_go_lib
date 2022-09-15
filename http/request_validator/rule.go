@@ -132,6 +132,5 @@ func rule_date(in interface{}, param string) (err error) {
 	if err != nil {
 		return fmt.Errorf("invalid date format: %s", err.Error())
 	}
-
 	return nil
 }
