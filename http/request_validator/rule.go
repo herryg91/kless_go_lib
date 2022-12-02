@@ -112,7 +112,7 @@ func rule_enum(in interface{}, param string) (err error) {
 		}
 	}
 
-	return errors.New("rule `enum` require value " + strings.Join(enumList, "|") + ". Got: " + inStr)
+	return errors.New("Invalid value. choice: " + strings.Join(enumList, "|") + ". Got: " + inStr)
 
 }
 
@@ -125,7 +125,7 @@ func rule_date(in interface{}, param string) (err error) {
 	}
 
 	if date_str == "" {
-		return errors.New("rule `date` is required")
+		return errors.New("param `{field}` is required")
 	}
 
 	_, err = time.Parse("2006-01-02", date_str)
