@@ -1,6 +1,8 @@
 package request_validator
 
 import (
+	"strings"
+
 	"github.com/herryg91/kless_go_lib/http/response"
 
 	"github.com/mcuadros/go-defaults"
@@ -15,7 +17,7 @@ func Validate(req interface{}) *response.Response {
 		for field, err := range errs.(validator.ErrorMap) {
 			other_errors = append(other_errors, response.ErrorFieldResponse{
 				Field:   field,
-				Message: err.Error(),
+				Message: strings.ReplaceAll(err.Error(), "{field}", field),
 			})
 		}
 	}
