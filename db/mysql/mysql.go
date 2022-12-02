@@ -3,6 +3,7 @@ package mysql
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"os"
 	"time"
 
@@ -38,7 +39,7 @@ func Connect(DBHost string, DBPort int, DBUserName string, DBPassword string, DB
 		DBUserName:     DBUserName,
 		DBPassword:     DBPassword,
 		DBDatabaseName: DBDatabaseName,
-		DBTimezone:     "Etc/UTC",
+		DBTimezone:     "Local",
 
 		printLog:     false,
 		logLevel:     logger.Silent,
@@ -58,8 +59,8 @@ func Connect(DBHost string, DBPort int, DBUserName string, DBPassword string, DB
 }
 
 func connect(param *mysql) (*gorm.DB, error) {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?loc=Local&parseTime=true&loc=%s",
-		param.DBUserName, param.DBPassword, param.DBHost, param.DBPort, param.DBDatabaseName, param.DBTimezone)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?loc=%s&parseTime=true",
+		param.DBUserName, param.DBPassword, param.DBHost, param.DBPort, param.DBDatabaseName, url.QueryEscape(param.DBTimezone))
 
 	cfg := &gorm.Config{}
 	if param.printLog {
